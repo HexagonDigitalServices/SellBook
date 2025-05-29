@@ -1,3 +1,13 @@
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  })
+const [toast, setToast] = useState({ visible: false, message: "", type: "info" })
+
+
 const validateForm = () => {
   const newErrors = {}
   if (!formData.name.trim()) newErrors.name = "Name is required"
