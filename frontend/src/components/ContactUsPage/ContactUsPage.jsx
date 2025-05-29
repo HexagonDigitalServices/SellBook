@@ -18,3 +18,14 @@ const validateForm = () => {
 }
 
 const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
+
+
+
+    const textLines = [
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.phone && `Phone: ${formData.phone}`,
+      formData.subject && `Subject: ${formData.subject}`,
+      `Message: ${formData.message}`,
+    ].filter(Boolean)
+    const text = textLines.join("\n")
