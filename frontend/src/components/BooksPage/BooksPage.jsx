@@ -1,3 +1,5 @@
+import { ShoppingBag, Plus, Minus, Star, Search } from "lucide-react"
+import { useLocation } from "react-router-dom"
 
 import BP1 from "../../assets/Book1.png"
 import BP2 from "../../assets/Book2.png"
@@ -35,4 +37,11 @@ const BooksPage = () => {
     { id: 15, title: "Gitanjali", author: "RabindraNath Tagore", price: 449, description: "The epic poem about the Trojan War and Achilles' rage...", image: BP15 },
     { id: 16, title: "The Unwilling", author: "John Hart", price: 399, description: "The adventures of a nobleman who imagines himself a knight...", image: BP16 }
   ]
+
+    const isInCart = (id) => cart?.items?.some(item => item.id === id && item.source === "booksPage")
+  const getCartQuantity = (id) => cart?.items?.find(item => item.id === id && item.source === "booksPage")?.quantity || 0
+
+  const handleAddToCart = (book) => dispatch({ type: "ADD_ITEM", payload: { ...book, quantity: 1, source: "booksPage" } })
+  const handleIncrement = (id) => dispatch({ type: "INCREMENT", payload: { id, source: "booksPage" } })
+  const handleDecrement = (id) => dispatch({ type: "DECREMENT", payload: { id, source: "booksPage" } })
 }
