@@ -79,6 +79,37 @@ const statusOptions = [
   ];
 
 
+ <tbody className="divide-y divide-gray-200">
+                {sortedOrders.map(order => (
+                  <tr key={order._id} className={styles.tableRow}>
+                    <td className={`${styles.tableCell} ${styles.idCell}`}>{order.orderId}</td>
+                    <td className={`${styles.tableCell} ${styles.customerCell}`}>{order.shippingAddress.fullName}</td>
+                    <td className={`${styles.tableCell} ${styles.dateCell}`}>
+                      {new Date(order.placedAt).toLocaleDateString()}
+                    </td>
+                    <td className={`${styles.tableCell} ${styles.amountCell}`}>₹{order.finalAmount.toFixed(2)}</td>
+                    <td className={styles.tableCell}>
+                      <div className={styles.paymentBadge(order.paymentMethod === "Online Payment")}>
+                        {order.paymentMethod === "Online Payment" ? 
+                          <CreditCard className="w-4 h-4" /> : 
+                          <DollarSign className="w-4 h-4" />
+                        }
+                        <span>{order.paymentMethod === "Online Payment" ? "Online" : "COD"}</span>
+                      </div>
+                    </td>
+                    <td className={styles.tableCell}>
+                      <StatusBadge status={order.orderStatus} />
+                    </td>
+                    <td className={`${styles.tableCell} text-right`}>
+                      <button onClick={() => viewOrder(order._id)} className={styles.viewButton}>
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+
+
 
                     { label: "Online Payment", color: "bg-purple-500" },
                   { label: "Cash on Delivery", color: "bg-orange-500" }
