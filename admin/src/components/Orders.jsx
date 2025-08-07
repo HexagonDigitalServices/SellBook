@@ -1,3 +1,9 @@
+import { 
+  Search, ChevronDown, ChevronUp, Truck, CreditCard, DollarSign, 
+  CheckCircle, Clock, AlertCircle, BookOpen, User, MapPin, 
+  Mail, Phone, Edit, X, Package, RefreshCw 
+} from "lucide-react";
+
 const statusOptions = [
   {
     value: "Pending",
@@ -35,6 +41,13 @@ const statusOptions = [
     iconColor: "text-red-500",
   },
 ];
+
+  const [orders, setOrders] = useState([]);
+  const [counts, setCounts] = useState({ totalOrders: 0, pending: 0, processing: 0, shipped: 0, delivered: 0, cancelled: 0, pendingPayment: 0 });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
 
   const sortedOrders = useMemo(() => {
