@@ -23,3 +23,5 @@ const tableHeaders = [
     { key: "rating", label: "Rating" },
     { key: null, label: "Actions" },
   ];
+
+★
