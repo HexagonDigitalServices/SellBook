@@ -117,4 +117,70 @@ const items = cart.items.map(item => ({
                   ))}
                 </div>
 
-                
+
+  {/* Right Column - Order Summary */}
+            <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-fit">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <ShoppingCart className="w-6 h-6 mr-2 text-[#43C6AC]" />
+                Order Summary
+              </h2>
+              
+              <div className="border-b border-gray-200 pb-4 mb-4">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Your Items</h3>
+                <div className="space-y-4">
+                  {cart.items.length > 0 ? (
+                    cart.items.map(item => (
+                      <div key={item.id} className="flex items-center">
+                          <img
+                          src={
+                            images[item.id]
+                              ? `${IMG_BASE}${images[item.id]}`
+                              : "/placeholder.png"
+                          }
+                          alt={item.title}
+                          className="w-16 h-16 object-cover rounded-xl mr-4"
+                        />
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">{item.title}</h4>
+                          <p className="text-gray-600 text-sm">by {item.author}</p>
+                        </div>
+                        <div className="ml-4 text-right">
+                          <p className="font-medium text-gray-900">₹{item.price.toFixed(2)}</p>
+                          <p className="text-gray-600 text-sm">Qty: {item.quantity}</p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-600">Your cart is empty</p>
+                  )}
+                </div>
+              </div>
+              
+              <div className="border-b border-gray-200 pb-6 mb-6">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">Order Details</h3>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Subtotal', value: `₹${subtotal.toFixed(2)}` },
+                    { label: 'Shipping', value: 'FREE' },
+                    { label: 'Tax', value: `₹${tax.toFixed(2)}` }
+                  ].map((item, i) => (
+                    <div key={i} className="flex justify-between">
+                      <span className="text-gray-600">{item.label}</span>
+                      <span className="text-gray-900">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="flex justify-between items-center mb-8">
+                <span className="text-lg font-bold text-gray-800">Total</span>
+                <span className="text-xl font-bold text-[#1A237E]">₹{total.toFixed(2)}</span>
+              </div>
+              
+              <div className="bg-gradient-to-r from-[#43C6AC]/10 to-[#F8FFAE]/10 rounded-xl p-4">
+                <h3 className="font-medium text-gray-800 mb-2">Delivery Estimate</h3>
+                <p className="text-gray-600">
+                  Your order will be delivered within 3-5 business days after processing.
+                </p>
+              </div>
+            </div>
