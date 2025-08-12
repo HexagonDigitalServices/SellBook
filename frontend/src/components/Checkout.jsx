@@ -104,20 +104,6 @@ const items = cart.items.map(item => ({
   ];
 
 
-      <div className="space-y-3">
-                  {[
-                    { label: 'Subtotal', value: `₹${subtotal.toFixed(2)}` },
-                    { label: 'Shipping', value: 'FREE' },
-                    { label: 'Tax', value: `₹${tax.toFixed(2)}` }
-                  ].map((item, i) => (
-                    <div key={i} className="flex justify-between">
-                      <span className="text-gray-600">{item.label}</span>
-                      <span className="text-gray-900">{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-
-
   {/* Right Column - Order Summary */}
             <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 h-fit">
               <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
