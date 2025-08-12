@@ -1,3 +1,9 @@
+import { 
+  Search, ChevronDown, ChevronUp, Truck, CreditCard, DollarSign, 
+  CheckCircle, Clock, AlertCircle, BookOpen, User, MapPin, 
+  Mail, Phone, Edit, X, Package, RefreshCw 
+} from "lucide-react";
+
 const statusOptions = [
   {
     value: "Pending",
@@ -36,6 +42,13 @@ const statusOptions = [
   },
 ];
 
+  const [orders, setOrders] = useState([]);
+  const [counts, setCounts] = useState({ totalOrders: 0, pending: 0, processing: 0, shipped: 0, delivered: 0, cancelled: 0, pendingPayment: 0 });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
 
   const sortedOrders = useMemo(() => {
     if (!sortConfig.key) return orders;
@@ -64,6 +77,37 @@ const statusOptions = [
     { label: "Delivered", value: counts.delivered, icon: CheckCircle, color: "bg-green-100", iconColor: "text-green-600" },
     { label: "Pending Payment", value: counts.pendingPayment, icon: CreditCard, color: "bg-purple-100", iconColor: "text-purple-600" }
   ];
+
+
+ <tbody className="divide-y divide-gray-200">
+                {sortedOrders.map(order => (
+                  <tr key={order._id} className={styles.tableRow}>
+                    <td className={`${styles.tableCell} ${styles.idCell}`}>{order.orderId}</td>
+                    <td className={`${styles.tableCell} ${styles.customerCell}`}>{order.shippingAddress.fullName}</td>
+                    <td className={`${styles.tableCell} ${styles.dateCell}`}>
+                      {new Date(order.placedAt).toLocaleDateString()}
+                    </td>
+                    <td className={`${styles.tableCell} ${styles.amountCell}`}>₹{order.finalAmount.toFixed(2)}</td>
+                    <td className={styles.tableCell}>
+                      <div className={styles.paymentBadge(order.paymentMethod === "Online Payment")}>
+                        {order.paymentMethod === "Online Payment" ? 
+                          <CreditCard className="w-4 h-4" /> : 
+                          <DollarSign className="w-4 h-4" />
+                        }
+                        <span>{order.paymentMethod === "Online Payment" ? "Online" : "COD"}</span>
+                      </div>
+                    </td>
+                    <td className={styles.tableCell}>
+                      <StatusBadge status={order.orderStatus} />
+                    </td>
+                    <td className={`${styles.tableCell} text-right`}>
+                      <button onClick={() => viewOrder(order._id)} className={styles.viewButton}>
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
 
 
 
