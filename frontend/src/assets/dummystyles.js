@@ -1,12 +1,13 @@
 // assets/dummy/dummystyles.js
 
+// Updated navbarStyles
 export const navbarStyles = {
   nav: (scrolled) =>
     `fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-500 ${
       scrolled ? "shadow-md py-2" : "py-4"
     }`,
 
-  container: "container mx-auto px-4 md:px-6",
+  container: "container mx-auto px-4 md:px-4 md:text-xs",
   logoContainer: "flex items-center",
   logoGradient: "absolute -inset-3 rounded-full opacity-0 blur-xl group-hover:opacity-30 transition-opacity bg-gradient-to-r from-[#43C6AC] to-[#F8FFAE]",
   logoImage: "h-8 w-8 rounded-full z-10",
@@ -65,12 +66,28 @@ export const navbarStyles = {
   mobileIconRow: "flex justify-between items-center mt-4",
   mobileCartBadge:
     "absolute top-0 right-0 -mt-1 -mr-1 w-5 h-5 flex items-center justify-center text-[10px] font-bold text-white bg-gradient-to-r from-amber-500 to-orange-600 rounded-full",
-}
+    
+      // Update these functions:
+  mobileNavIcon: (isActive, color) => {
+    const baseColor = color.includes('violet') ? 'violet' : color.split('-')[1];
+    return `h-5 w-5 ${isActive ? `text-${baseColor}-500` : "text-gray-600"}`;
+  },
+  
+  mobileNavText: (isActive, color) => {
+    const baseColor = color.includes('violet') ? 'violet' : color.split('-')[1];
+    return `ml-3 ${isActive ? `text-${baseColor}-600 font-medium` : "text-gray-600"}`;
+  },
+  
+  // Add this new helper:
+  getBaseColor: (color) => 
+    color.includes('violet') ? 'violet' : color.split('-')[1],
+  
+};
 
 //banner
 
 export const container =
-  "min-h-screen flex items-center justify-center px-4 pt-20 md:pt-24 pb-12 relative bg-gradient-to-br from-[#43C6AC]/90 to-[#2B5876]/90";
+  "min-h-screen flex items-center justify-center px-4 pt-20 md:pt-29 pb-12 relative bg-gradient-to-br from-[#43C6AC]/90 to-[#2B5876]/90";
 
 export const glassBox =
   "backdrop-blur-2xl bg-white/95 rounded-xl md:rounded-[2rem] shadow-lg md:shadow-2xl max-w-7xl w-full mx-4 p-6 md:p-8 lg:p-12 relative overflow-hidden";
