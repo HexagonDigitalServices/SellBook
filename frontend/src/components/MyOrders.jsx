@@ -1,9 +1,8 @@
-  // Replace your static array with fetched data:
   const [orders, setOrders] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  // Status badge definitions (unchanged)
+  // Status badge definitions
   const statusOptions = [
     {
       value: "pending",
@@ -44,7 +43,7 @@
 
 
 
-  // Sorting handler (unchanged)
+  // Sorting handler
   const handleSort = (key) => {
     setSortConfig((prev) => ({
       key,
@@ -68,8 +67,6 @@
     });
   }, [orders, sortConfig]);
 
-  // Status badge component (unchanged)
-  // Inside UserOrdersPage.jsx, replace your StatusBadge with this:
 
   const StatusBadge = ({ status }) => {
     // case-insensitive match:
